@@ -1,0 +1,55 @@
+﻿@model IEnumerable<InAndOut.Models.Expense>
+
+<div class="container p-3">
+	<div class="row pt-4">
+		<div class="col-6">
+			<h2 class="text-primary">Borrowed Items List</h2>
+		</div>
+		<div class="col-6 text-right">
+			<a asp-controller="Expenses" asp-action="Create" class="btn btn-primary">Create new Item</a>
+		</div>
+	</div>
+	<br />
+
+	@if(Model.Count() > 0)
+	{
+		<table class="table table-bordered table-striped" style="width:100%">
+			<thead>
+				<tr>
+					<th>
+						Item Name
+					</th>
+					<th>
+						Price
+					</th>
+					<th>
+						Expense Type
+					</th>
+					<th>
+						Actions
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach(var item in Model)
+				{
+					<tr>
+						<td width="25%">@item.ItemName</td>
+						<td width="25%">@item.Price</td>
+						<td width="25%">@item.ExpenseType.Name</td>
+						<td width="25%">
+							<div class="w-100 btn-group" role="group">
+								<a asp-controller="Expenses" asp-action="Update" asp-route-Id="@item.Id" class="btn btn-primary mx-1">Update</a>
+								<a asp-controller="Expenses" asp-action="Delete" asp-route-Id="@item.Id" class="btn btn-danger mx-1">Delete</a>
+							</div>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	} else
+	{
+		<p>No items created yet</p>
+	}
+
+</div>
